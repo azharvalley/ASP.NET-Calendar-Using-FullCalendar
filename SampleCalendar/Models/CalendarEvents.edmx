@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CalendarEventModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="UTCStartDateTime" Type="nvarchar" MaxLength="100" />
+          <Property Name="UTCEndDateTime" Type="nvarchar" MaxLength="100" />
+          <Property Name="ThemeColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsFullDay" Type="bit" />
+          <Property Name="IsRecurring" Type="bit" />
+          <Property Name="RRule" Type="nvarchar" MaxLength="500" />
+          <Property Name="EventTypeId" Type="int" />
+          <Property Name="RepeatEndDate" Type="datetime" />
+          <Property Name="UTCRepeatEndDate" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="EventGUID" Type="nvarchar" MaxLength="500" />
+          <Property Name="EventStatus" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <Function Name="DeleteEventByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="FetchAllActiveEvents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EventTypeId" Type="int" Mode="In" />
+          <Parameter Name="search" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateEvent_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="bigint" Mode="In" />
+          <Parameter Name="EventStatus" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CalendarEventModelStoreContainer">
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CalendarEventModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="UTCStartDateTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UTCEndDateTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ThemeColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" />
+          <Property Name="IsRecurring" Type="Boolean" />
+          <Property Name="RRule" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EventTypeId" Type="Int32" />
+          <Property Name="RepeatEndDate" Type="DateTime" Precision="3" />
+          <Property Name="UTCRepeatEndDate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="EventGUID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EventStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="CalendarEventEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <FunctionImport Name="DeleteEventByEventId" ReturnType="Collection(String)">
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="FetchAllActiveEvents" ReturnType="Collection(CalendarEventModel.FetchAllActiveEvents_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="EventTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateEvent_Status">
+            <Parameter Name="EventID" Mode="In" Type="Int64" />
+            <Parameter Name="EventStatus" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="FetchAllActiveEvents_Result">
+          <Property Type="Int64" Name="EventID" Nullable="false" />
+          <Property Type="String" Name="Subject" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="Start" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="End" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UTCStartDateTime" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UTCEndDateTime" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ThemeColor" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsFullDay" Nullable="true" />
+          <Property Type="Boolean" Name="IsRecurring" Nullable="true" />
+          <Property Type="String" Name="RRule" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="EventTypeId" Nullable="true" />
+          <Property Type="DateTime" Name="RepeatEndDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UTCRepeatEndDate" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="String" Name="EventGUID" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="EventStatus" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="300" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CalendarEventModelStoreContainer" CdmEntityContainer="CalendarEventEntities">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="CalendarEventModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="UTCStartDateTime" ColumnName="UTCStartDateTime" />
+                <ScalarProperty Name="UTCEndDateTime" ColumnName="UTCEndDateTime" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="IsRecurring" ColumnName="IsRecurring" />
+                <ScalarProperty Name="RRule" ColumnName="RRule" />
+                <ScalarProperty Name="EventTypeId" ColumnName="EventTypeId" />
+                <ScalarProperty Name="RepeatEndDate" ColumnName="RepeatEndDate" />
+                <ScalarProperty Name="UTCRepeatEndDate" ColumnName="UTCRepeatEndDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EventGUID" ColumnName="EventGUID" />
+                <ScalarProperty Name="EventStatus" ColumnName="EventStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteEventByEventId" FunctionName="CalendarEventModel.Store.DeleteEventByEventId" />
+          <FunctionImportMapping FunctionImportName="FetchAllActiveEvents" FunctionName="CalendarEventModel.Store.FetchAllActiveEvents">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CalendarEventModel.FetchAllActiveEvents_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="UTCStartDateTime" ColumnName="UTCStartDateTime" />
+                <ScalarProperty Name="UTCEndDateTime" ColumnName="UTCEndDateTime" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="IsRecurring" ColumnName="IsRecurring" />
+                <ScalarProperty Name="RRule" ColumnName="RRule" />
+                <ScalarProperty Name="EventTypeId" ColumnName="EventTypeId" />
+                <ScalarProperty Name="RepeatEndDate" ColumnName="RepeatEndDate" />
+                <ScalarProperty Name="UTCRepeatEndDate" ColumnName="UTCRepeatEndDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EventGUID" ColumnName="EventGUID" />
+                <ScalarProperty Name="EventStatus" ColumnName="EventStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateEvent_Status" FunctionName="CalendarEventModel.Store.UpdateEvent_Status" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

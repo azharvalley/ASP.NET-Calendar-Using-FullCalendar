@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2212D8D3-7395-4E21-9F13-C99C8EFFDADE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SampleCalendar</RootNamespace>
+    <AssemblyName>SampleCalendar</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="csfile\Generic.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalendarEvents.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarEvents.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalendarEvents.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarEvents.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalendarEvents.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarEvents.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Event.cs">
+      <DependentUpon>CalendarEvents.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FetchAllActiveEvents_Result.cs">
+      <DependentUpon>CalendarEvents.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="calendar-js-api\calendar-design-1.0.css" />
+    <Content Include="calendar-js-api\CalOperations.js" />
+    <Content Include="calendar-js-api\FullCalendar-4.0.js" />
+    <Content Include="calendar-js-api\rrule-generator-2.1.js" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="images\loader.gif" />
+    <Content Include="Library\font-awesome\css\font-awesome.css" />
+    <Content Include="Library\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Library\font-awesome\fonts\fa-brands-400.svg" />
+    <Content Include="Library\font-awesome\fonts\fa-duotone-900.svg" />
+    <Content Include="Library\font-awesome\fonts\fa-light-300.svg" />
+    <Content Include="Library\font-awesome\fonts\fa-regular-400.svg" />
+    <Content Include="Library\font-awesome\fonts\fa-solid-900.svg" />
+    <Content Include="Library\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Library\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Library\fullcalendarv4\packages\bootstrap\main.css" />
+    <Content Include="Library\fullcalendarv4\packages\bootstrap\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\bootstrap\main.min.css" />
+    <Content Include="Library\fullcalendarv4\packages\bootstrap\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales-all.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales-all.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\af.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ar-dz.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ar-kw.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ar-ly.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ar-ma.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ar-sa.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ar-tn.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ar.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\bg.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\bs.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ca.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\cs.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\da.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\de.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\el.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\en-au.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\en-gb.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\en-nz.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\es-us.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\es.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\et.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\eu.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\fa.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\fi.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\fr-ca.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\fr-ch.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\fr.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\gl.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\he.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\hi.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\hr.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\hu.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\id.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\is.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\it.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ja.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ka.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\kk.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ko.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\lb.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\lt.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\lv.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\mk.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ms.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\nb.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\nl.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\nn.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\pl.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\pt-br.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\pt.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ro.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\ru.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\sk.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\sl.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\sq.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\sr-cyrl.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\sr.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\sv.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\th.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\tr.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\uk.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\vi.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\zh-cn.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\locales\zh-tw.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\main.css" />
+    <Content Include="Library\fullcalendarv4\packages\core\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\core\main.min.css" />
+    <Content Include="Library\fullcalendarv4\packages\core\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\daygrid\main.css" />
+    <Content Include="Library\fullcalendarv4\packages\daygrid\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\daygrid\main.min.css" />
+    <Content Include="Library\fullcalendarv4\packages\daygrid\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\google-calendar\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\google-calendar\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\interaction\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\interaction\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\list\main.css" />
+    <Content Include="Library\fullcalendarv4\packages\list\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\list\main.min.css" />
+    <Content Include="Library\fullcalendarv4\packages\list\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\luxon\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\luxon\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\moment-timezone\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\moment-timezone\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\moment\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\moment\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\rrule\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\rrule\main.min.js" />
+    <Content Include="Library\fullcalendarv4\packages\timegrid\main.css" />
+    <Content Include="Library\fullcalendarv4\packages\timegrid\main.js" />
+    <Content Include="Library\fullcalendarv4\packages\timegrid\main.min.css" />
+    <Content Include="Library\fullcalendarv4\packages\timegrid\main.min.js" />
+    <Content Include="Library\fullcalendarv4\vendor\rrule.js" />
+    <Content Include="Models\CalendarEvents.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CalendarEvents.Context.cs</LastGenOutput>
+      <DependentUpon>CalendarEvents.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\CalendarEvents.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CalendarEvents.edmx</DependentUpon>
+      <LastGenOutput>CalendarEvents.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Library\font-awesome\.bower.json" />
+    <Content Include="Library\font-awesome\.gitignore" />
+    <Content Include="Library\font-awesome\.npmignore" />
+    <Content Include="Library\font-awesome\bower.json" />
+    <Content Include="Library\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Library\font-awesome\fonts\fa-brands-400.eot" />
+    <Content Include="Library\font-awesome\fonts\fa-brands-400.ttf" />
+    <Content Include="Library\font-awesome\fonts\fa-brands-400.woff" />
+    <Content Include="Library\font-awesome\fonts\fa-brands-400.woff2" />
+    <Content Include="Library\font-awesome\fonts\fa-duotone-900.eot" />
+    <Content Include="Library\font-awesome\fonts\fa-duotone-900.ttf" />
+    <Content Include="Library\font-awesome\fonts\fa-duotone-900.woff" />
+    <Content Include="Library\font-awesome\fonts\fa-duotone-900.woff2" />
+    <Content Include="Library\font-awesome\fonts\fa-light-300.eot" />
+    <Content Include="Library\font-awesome\fonts\fa-light-300.ttf" />
+    <Content Include="Library\font-awesome\fonts\fa-light-300.woff" />
+    <Content Include="Library\font-awesome\fonts\fa-light-300.woff2" />
+    <Content Include="Library\font-awesome\fonts\fa-regular-400.eot" />
+    <Content Include="Library\font-awesome\fonts\fa-regular-400.ttf" />
+    <Content Include="Library\font-awesome\fonts\fa-regular-400.woff" />
+    <Content Include="Library\font-awesome\fonts\fa-regular-400.woff2" />
+    <Content Include="Library\font-awesome\fonts\fa-solid-900.eot" />
+    <Content Include="Library\font-awesome\fonts\fa-solid-900.ttf" />
+    <Content Include="Library\font-awesome\fonts\fa-solid-900.woff" />
+    <Content Include="Library\font-awesome\fonts\fa-solid-900.woff2" />
+    <Content Include="Library\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Library\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Library\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Library\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Library\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Library\font-awesome\less\animated.less" />
+    <Content Include="Library\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Library\font-awesome\less\core.less" />
+    <Content Include="Library\font-awesome\less\fixed-width.less" />
+    <Content Include="Library\font-awesome\less\font-awesome.less" />
+    <Content Include="Library\font-awesome\less\icons.less" />
+    <Content Include="Library\font-awesome\less\larger.less" />
+    <Content Include="Library\font-awesome\less\list.less" />
+    <Content Include="Library\font-awesome\less\mixins.less" />
+    <Content Include="Library\font-awesome\less\path.less" />
+    <Content Include="Library\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Library\font-awesome\less\screen-reader.less" />
+    <Content Include="Library\font-awesome\less\stacked.less" />
+    <Content Include="Library\font-awesome\less\variables.less" />
+    <Content Include="Library\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Library\font-awesome\scss\_animated.scss" />
+    <Content Include="Library\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Library\font-awesome\scss\_core.scss" />
+    <Content Include="Library\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Library\font-awesome\scss\_icons.scss" />
+    <Content Include="Library\font-awesome\scss\_larger.scss" />
+    <Content Include="Library\font-awesome\scss\_list.scss" />
+    <Content Include="Library\font-awesome\scss\_mixins.scss" />
+    <Content Include="Library\font-awesome\scss\_path.scss" />
+    <Content Include="Library\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Library\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Library\font-awesome\scss\_stacked.scss" />
+    <Content Include="Library\font-awesome\scss\_variables.scss" />
+    <EntityDeploy Include="Models\CalendarEvents.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CalendarEvents.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CalendarEvents.edmx.diagram">
+      <DependentUpon>CalendarEvents.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60477</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:60477/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

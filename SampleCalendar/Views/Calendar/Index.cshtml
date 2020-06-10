@@ -1,0 +1,419 @@
+﻿
+@{
+    string sview = Request.Params["sview"] == null || Request.Params["sview"] == "" ? "" : Request.Params["sview"].ToString();
+    string sdate = Request.Params["sdate"] == null || Request.Params["sdate"] == "" || Request.Params["sdate"] == "Invalid date" ? DateTime.Now.ToString() : Convert.ToDateTime(Request.Params["sdate"]).ToString();
+}
+
+<h2>Calendar</h2>
+
+<input type="hidden" id="CurrentOpenViewOfCalendar" value="@sview" />
+<input type="hidden" id="hddDeleteThisAndAllFutureEvents" value="0" />
+<div id="calender"></div>
+
+<div id="myModal" class="modal fade viewEventModel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="model-area-head" id="srtophead">
+                <div class="model-close">
+                    <ul class="model-close-check">
+                        <li>
+                            <label>Status : &nbsp;&nbsp;</label>
+                            <select name='drpEventStatus' id='drpEventStatus'>
+                                <option value='Scheduled'>Scheduled</option>
+                                <option value='No Show'>No Show</option>
+                                <option value='Canceled'>Canceled</option>
+                                <option value='Completed'>Completed</option>
+                            </select>
+                        </li>
+                        <li><button id="btnEdit" class="model-btn" title="Edit event"><i class="far fa-edit"></i></button></li>
+                        <li><button id="btnDelete" class="model-btn" title="Delete event"><i class="far fa-trash"></i></button></li>
+                        <li><button type="button" class="close" data-dismiss="modal" title="Close window"><i class="far fa-times"></i></button></li>
+                    </ul>
+
+                </div>
+
+
+                <div class="modal-header">
+                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                </div>
+                <i class="fa fa-calendar model-indicator" id="pnlStatusbell"></i>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="model-body-main">
+                    <div class="model-body-ico">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="model-body-txt">
+                        <p style="font-size: 20px;font-weight: 600;color: #3c8dbc;"><span id="eventstartendtime"></span><br /></p>
+                    </div>
+                </div>
+
+                <div class="model-body-main hidden">
+                    <div class="model-body-ico">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="model-body-txt">
+                        <p><strong>Start Date and Time :</strong><br /><span id="vestartdate"></span></p>
+                    </div>
+                </div>
+                <div class="model-body-main hidden">
+                    <div class="model-body-ico">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="model-body-txt">
+                        <p><strong>End Date and Time :</strong><br /><span id="veenddate"></span></p>
+                    </div>
+                </div>
+
+
+                <div class="model-body-main">
+                    <div class="model-body-ico">
+                        <i class="far fa-comment"></i>
+                    </div>
+                    <div class="model-body-txt">
+                        <p><strong>Description :</strong><br /><span id="veDescription"></span></p>
+                    </div>
+                </div>
+
+                <div class="model-body-main">
+                    <div class="model-body-ico">
+                        <i class="fa fa-external-link" style="visibility:hidden"></i>
+                    </div>
+                    <div class="model-body-txt dynbtn">
+                        <span id="loadingpleasewait_startsessionbtn" class="error" style="display:none;"></span>
+                        <img src="~/images/loader.gif" style="display:none;" id="loaderpopupview" />
+                    </div>
+                </div>
+
+                <input class="form-control hidden" type="text" id="hddViewingRRULe" name="hddViewingRRULe" value="" readonly />
+                <input type="hidden" id="hiddenEventID" name="hiddenEventID" value="" />
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="myModalSave" class="modal fade viewEventModel" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="model-area-head" id="Editsrtophead">
+                <div class="model-close">
+                    <ul class="model-close-check">
+                        <li><button type="button" class="close" data-dismiss="modal" title="Close window"><i class="far fa-times"></i></button></li>
+                    </ul>
+                </div>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ThisIsYourTitle">Select Event Type</h4>
+                </div>
+                <i class="far fa-calendar model-indicator" id="EditpnlStatusbell"></i>
+            </div>
+            <div class="modal-body">
+                <form class="">
+                    <input type="hidden" id="hdEventID" value="0" />
+                    <input type="hidden" id="hddEventStatus" value="0" />
+                    <input type="hidden" id="hddCalendarEventType" value="0" />
+                    <input type="hidden" id="hddChangeThisAndAllFutureEvents" value="0" />
+                    <div class="form-group" id="DivRadioEventType">
+                        <div class="switch-field radioevent">
+                            <div class="switch-title"></div>
+                            <input type="radio" id="EventType_1" name="EventType" value="1" />
+                            <label for="EventType_1" id="lbl_EventType_1">Event</label>
+                            @*<input type="radio" id="EventType_2" name="EventType" value="2" />
+                            <label for="EventType_2" id="lbl_EventType_2">Appointment slots</label>*@
+                        </div>
+                    </div>
+                    <div class="row" id="EditPanelDiv">
+
+                        <div class="col-sm-12 UpdateThisAndAllFutureEvents" id="UpdateThisAndAllFutureEvents" style="display:none;">
+                            <h4 class="text-light-blue text-center">This is a recurring event. Would you like to edit <strong>only this</strong> event, <br />or <strong>this and all future</strong> events, or <strong>all </strong>events?</h4>
+                            <span id="errorthiseventorallfutureevents" class="hidden error text-center"></span>
+                            <div class="switch-field radioevent" id="recurringeventsedit">
+                                <div class="switch-title"></div>
+                                <input type="radio" id="thiseventonly_1" name="ChangeThisAndAllFutureEvents" value="1" />
+                                <label for="thiseventonly_1" id="lbl_thiseventonly_1">This event</label>
+                                <input type="radio" id="thisplusfutureevents_2" name="ChangeThisAndAllFutureEvents" value="2" />
+                                <label for="thisplusfutureevents_2" id="lbl_thisplusfutureevents_2">This and all future events</label>
+                                <input type="radio" id="allevents_3" name="ChangeThisAndAllFutureEvents" value="3" />
+                                <label for="allevents_3" id="lbl_allevents_3">All events</label>
+                            </div>
+
+                        </div>
+
+                        <div class="text-center" style="display:none;" id="loaderCalendarPopUp">
+                            <img src="~/images/loader.gif" /> <span>Fetching...</span>
+                        </div>
+                        <div id="titledivforevent">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Title<em>*</em></label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <input type="text" id="txtSubject" class="form-control validateme" placeholder="Add event title or heading" />
+                                    <span id="errortxtSubject" class="hidden error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+
+                        <div class="col-sm-2">
+                            <div class="model-body-ico">
+                                <i class="far fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <input type='text' class="form-control validateme" id='txtStart' autocomplete="off" onfocus="this.removeAttribute('readonly');" />
+                                <span id="errortxtStart" class="hidden error"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="model-body-ico">
+                                <p>to</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group" id="divEndDate">
+                                <input type='text' class="form-control validateme" id='txtEnd' autocomplete="off" onfocus="this.removeAttribute('readonly');" />
+                                <span id="errortxtEnd" class="hidden error"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-2">
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group" id="divfullday">
+                                <label>Full Day</label>
+                                <input type="checkbox" id="chkIsFullDay" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="primary" data-offstyle="default">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="clearfix"></div>
+                        <div class="hidden">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Repeat</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <select id="drpRepeatCustom" name="drpRepeatCustom" class="form-control">
+                                            <option value="0" data-rrule="">Does not repeat</option>
+                                            <option value="1" data-rvalue="" data-rrule="">Repeat this event/appointment...</option>
+                                        </select>
+                                        <input type="hidden" id="hdAddNewOptions" name="hdAddNewOptions" value="0" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-12 hidden">
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="hddRRULe" name="hddRRULe" value="" readonly />
+                                <input class="form-control" type="text" id="CustomRRULEDescription" name="CustomRRULEDescription" value="" readonly />
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label>Description</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <textarea id="txtDescription" rows="3" class="form-control" style="resize: vertical;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-sm-12 form-group">
+                            <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <img src="~/images/loader.gif" style="display:none;" id="loaderpopup" />
+                            <span id="loadingpleasewait_saveevent" class="error" style="display:none;"></span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="mycustomRecurringModal" class="modal fade currulepop" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Custom recurrence</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label style="display: inline-block;">Repeat </label>
+                            <select class="form-control" id="crFREQ" name="crFREQ" style="display: inline-block; width: 200px;">
+                                @*<option value="DAILY">Daily</option>*@
+                                <option value="WEEKLY">Weekly</option>
+                                <option value="MONTHLY">Monthly</option>
+                                @*<option value="YEARLY">Yearly</option>*@
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>every</label>
+                            <input type="number" id="crINTERVAL" name="crINTERVAL" value="1" style="width: 60px; display: inline-block;" min="1" max="100" class="positive form-control" /> <span id="lblrepeatinterval" style="display: inline-block;"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="clearfix"></div>
+                <div class="form-group" id="pdivWeeklyRecurringOption" style="display:none;">
+                    <label>Repeat on</label>
+                    <div class="weekDays-selector">
+                        <input type="checkbox" id="Reccweekday_0" value="SU" class="weekday repeatonCheckbox" name="crwBYDAY" />
+                        <label for="Reccweekday_0">S</label>
+                        <input type="checkbox" id="Reccweekday_1" value="MO" class="weekday repeatonCheckbox" name="crwBYDAY" />
+                        <label for="Reccweekday_1">M</label>
+                        <input type="checkbox" id="Reccweekday_2" value="TU" class="weekday repeatonCheckbox" name="crwBYDAY" />
+                        <label for="Reccweekday_2">T</label>
+                        <input type="checkbox" id="Reccweekday_3" value="WE" class="weekday repeatonCheckbox" name="crwBYDAY" />
+                        <label for="Reccweekday_3">W</label>
+                        <input type="checkbox" id="Reccweekday_4" value="TH" class="weekday repeatonCheckbox" name="crwBYDAY" />
+                        <label for="Reccweekday_4">T</label>
+                        <input type="checkbox" id="Reccweekday_5" value="FR" class="weekday repeatonCheckbox" name="crwBYDAY" />
+                        <label for="Reccweekday_5">F</label>
+                        <input type="checkbox" id="Reccweekday_6" value="SA" class="weekday repeatonCheckbox" name="crwBYDAY" />
+                        <label for="Reccweekday_6">S</label>
+                    </div>
+                </div>
+                <div id="pdivMonthlyRecurringOption" style="display:none;">
+                    <div class="form-group">
+                        <div class="radio" style="display:inline-block">
+                            <label><input type="radio" name="crRadioMonthlyRecOn" value="onday" checked /> on day</label>
+                        </div>
+
+                        <select id="crBYMONTHDAY" name="crBYMONTHDAY" class="crRDropDpwndPO form-control" style="display:inline-block;width:200px;">
+                            @for (int i = 1; i <= 31; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group hidden">
+                        <div class="radio" style="display:inline-block">
+                            <label> <input type="radio" name="crRadioMonthlyRecOn" value="onthe" /> on the</label>
+                        </div>
+                        <select id="crBYSETPOS" name="crBYSETPOS" class="crRDropDpwndPO form-control" style="display:inline-block;width:200px;">
+                            <option value="1">First</option>
+                            <option value="2">Second</option>
+                            <option value="3">Third</option>
+                            <option value="4">Fourth</option>
+                            <option value="-1">Last</option>
+                        </select>
+                        <select id="crBYDAY" name="crBYDAY" class="crRDropDpwndPO form-control" style="display:inline-block;width:200px;margin-left: 58px;">
+                            <option value="SU">Sunday</option>
+                            <option value="MO">Monday</option>
+                            <option value="TU">Tuesday</option>
+                            <option value="WE">Wednesday</option>
+                            <option value="TH">Thursday</option>
+                            <option value="FR">Friday</option>
+                            <option value="ST">Saturday</option>
+                            <option value="MO,TU,WE,TH,FR">Weekday</option>
+                            <option value="SU,SA">Weekend</option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <div class="clearfix"></div>
+                <label>Ends</label>
+                <div class="form-group hidden">
+                    <div class="radio">
+                        <label><input type="radio" name="RadioEndsOn" value="Never" />After one year</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="radio">
+                        <label style="display:inline-block;"><input type="radio" name="RadioEndsOn" value="Until" checked />On</label> <input type="text" id="crUNTIL" name="crUNTIL" style="width: 200px;display:inline-block;" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group hidden">
+                    <div class="radio">
+                        <label style="display:inline-block;"><input type="radio" name="RadioEndsOn" value="After" />After</label> <input type="number" id="crCOUNT" name="crCOUNT" value="13" style="width: 60px;display:inline-block;" min="1" max="100" class="positive form-control" /> occurences
+                    </div>
+                </div>
+
+
+
+                <div class="clearfix"></div>
+                <input class="form-control hidden" type="text" id="txtRRULE" name="txtRRULE" value="" readonly />
+                <input class="form-control" style="background-color: transparent;border: none;color: #3c8dbc;font-weight: 800;padding: 0px;" type="text" id="lblRRULEWord" name="lblRRULEWord" value="" readonly />
+            </div>
+            <div class="modal-footer">
+
+                <input type="submit" id="btncustomRecurring" class="btn btn-primary" value="Ok" />
+                <button class="btn btn-default text-center" type="button" data-dismiss="modal" aria-hidden="true" id="RRCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+
+    <!--FullCalendar Library::Do not change these files-->
+    <link href='~/Library/fullcalendarv4/packages/core/main.css' rel='stylesheet' />
+    <link href='~/Library/fullcalendarv4/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='~/Library/fullcalendarv4/packages/timegrid/main.css' rel='stylesheet' />
+    <link href='~/Library/fullcalendarv4/packages/list/main.css' rel='stylesheet' />
+    <script src='~/Library/fullcalendarv4/vendor/rrule.js'></script>
+    <script src='~/Library/fullcalendarv4/packages/core/main.js'></script>
+    <script src='~/Library/fullcalendarv4/packages/interaction/main.js'></script>
+    <script src='~/Library/fullcalendarv4/packages/daygrid/main.js'></script>
+    <script src='~/Library/fullcalendarv4/packages/timegrid/main.js'></script>
+    <script src='~/Library/fullcalendarv4/packages/list/main.js'></script>
+    <script src='~/Library/fullcalendarv4/packages/rrule/main.js'></script>
+    <script src="~/Library/fullcalendarv4/packages/moment/main.js"></script>
+    <!--END-->
+    <!--Required JS and CSS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+
+    <!--Customize the JavaScript and CSS as per your requirments-->
+    <link href="~/calendar-js-api/calendar-design-1.0.css" rel="stylesheet" />
+    <script src="~/calendar-js-api/CalOperations.js"></script>
+    <script src="~/calendar-js-api/FullCalendar-4.0.js?id=@{@SampleCalendar.Models.Generic.GetRandomString();}"></script>
+    <script src="~/calendar-js-api/rrule-generator-2.1.js?id=@{@SampleCalendar.Models.Generic.GetRandomString();}"></script>
+
+}

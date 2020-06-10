@@ -1,0 +1,353 @@
+﻿.btn-round-bullet {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #DDD;
+    vertical-align: middle;
+    border-radius: 30px;
+}
+.weekDays-selector input {
+    display: none !important;
+}
+
+    .weekDays-selector input[type=checkbox] + label {
+        display: inline-block;
+        border-radius: 6px;
+        background: #dddddd;
+        height: 40px;
+        width: 30px;
+        margin-right: 3px;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .weekDays-selector input[type=checkbox]:checked + label {
+        background: #2AD705;
+        color: #ffffff;
+    }
+
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.fc-time,
+.fc-title {
+    /*display: inline-block;*/
+}
+.past-event {
+    opacity: 0.5 !important;
+    color: #100f0f !important;
+}
+.event-iscomplete {
+    opacity: 0.5 !important;
+    color: #0c0000 !important;
+}
+
+.switch-field {
+    font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+    padding: 0px 0px 10px;
+    text-align: center;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.switch-title {
+    margin-bottom: 6px;
+}
+
+.switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+}
+
+/*.switch-field label {
+    float: left;
+}*/
+
+.switch-field label {
+    display: inline-block;
+    width: auto;
+    background-color: transparent;
+    margin: 0px 5px 0px;
+    border-radius: 0px;
+    color: #000;
+    font-size: 13px;
+    font-weight: normal;
+    text-align: center;
+    /*width: 200px;*/
+    text-shadow: none;
+    padding: 8px 15px;
+    border: 1px solid #4285f4;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    border-radius: 10px;
+}
+
+    .switch-field label:hover {
+        cursor: pointer;
+        -webkit-box-shadow: 0 0 10px #808080;
+        box-shadow: 0 0 10px #808080;
+    }
+
+.switch-field input:checked + label {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #fff;
+    background-color: #4285f4;
+    border: 1px solid #4285f4;
+}
+.fc-content .sr-ico {
+    float: right;
+    vertical-align: top;
+    position: absolute;
+    top: 7px;
+    right: 6px;
+    font-size: 20px;
+}
+.fc-content .sr-bell {
+    display: inline-block;
+    float: left;
+    margin: 5px 3px 5px 0px;
+}
+.fc-content {
+    padding: 5px 10px 10px;
+}
+.fc-time-grid-event .fc-time {
+    font-size: 13px !important;
+}
+.fc-title {
+    font-size: 14px !important;
+    font-weight: 600;
+}
+.sr-check {
+    font-size: 20px !important;
+    /*color: #4e9525;*/
+}
+
+
+.viewEventModel .modal-header {
+        color: #fff;
+        padding: 0px 15px 35px;
+    }
+
+.viewEventModel .modal-title {
+    display: block;
+    /*text-align: center;*/
+    margin-left: 70px;
+    font-size: 20px;
+    font-weight: 600;
+}
+    .viewEventModel .close {
+        float: none;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-shadow: none;
+        filter: alpha(opacity=20);
+        opacity: 1;
+    }
+.viewEventModel .model-close {
+    text-align: right;
+    padding: 15px 10px 5px;
+}
+    .viewEventModel .model-area-head {
+        background-color: #808080;
+        color: #fff;
+        position: relative;
+        margin-bottom: 25px;
+    }
+    .viewEventModel .model-btn {
+        color: #fff;
+        font-size: 18px;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+.viewEventModel .model-indicator {
+    position: absolute;
+    bottom: -22px;
+    left: 31px;
+    background-color: #808080;
+    color: #fff;
+    /*background-color: #fff;
+    color: #555;*/
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+}
+    .viewEventModel ul.model-close-check li {
+        display: inline-block;
+        margin: 0 15px;
+    }
+    .viewEventModel select#drpEventStatus {
+        background-color: transparent;
+        min-width: 120px;
+        border: 1px solid #fff;
+        padding: 4px 10px 5px;
+        font-size: 14px;
+    }
+    .viewEventModel option {
+        background-color: #fff !important;
+        color: #000 !important;
+        cursor: pointer;
+    }
+.model-body-ico {
+    float: left;
+    margin: 0px 20px 0px 0px;
+    font-size: 20px;
+}
+.model-body-txt {
+    overflow: hidden;
+}
+.customcolordiv input{
+    height: 32px;
+    border: 1px solid #eee;
+    padding-left: 7px;
+}
+.customcolordiv .input-group-addon {
+    background-color: #eee;
+}
+.select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+    padding: 3px 0px;
+}
+.popover-content {
+    word-break: break-all;
+}
+@media(max-width:1024px) {
+    .viewEventModel {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+}
+    @media(max-width:767px) {
+        .btn {
+            padding: 6px 10px;
+            font-size: 13px;
+        }
+        .invico i {
+            font-size: 20px;
+        }
+        .modal-header .close {
+            font-size: 26px;
+            width: 20px;
+            height: 20px;
+        }
+        .tbltr-nobdr a {
+            font-size: 22px;
+        }
+        .removeUploadedFile {
+            font-size: 22px;
+        }
+        .viewEventModel .modal-dialog {
+            width: 300px;
+            margin: 10px auto;
+        }
+
+        .viewEventModel .model-close-check {
+            padding: 0px;
+        }
+
+
+        .viewEventModel select#drpEventStatus {
+            min-width: 100px;
+            font-size: 12px;
+        }
+
+        .viewEventModel .model-btn {
+            font-size: 20px;
+        }
+
+        .viewEventModel .close {
+            font-size: 22px;
+        }
+
+        .viewEventModel .modal-title {
+            font-size: 16px;
+        }
+
+        .viewEventModel ul.model-close-check li {
+            margin: 0 10px;
+        }
+
+        .viewEventModel .model-indicator {
+            bottom: -19px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+            line-height: 39px;
+        }
+
+        .viewEventModel .model-area-head {
+            margin-bottom: 15px;
+        }
+        .switch-field label {
+     
+            width: auto;
+
+        }
+        .filterdiv {
+            text-align: center;
+        }
+        .filterdiv select {
+            display: block;
+            margin: 10px auto;
+            width: 250px;
+        }
+        .fc-toolbar .fc-right {
+            margin: 25px 0 20px;
+        }
+    }
+
+
+
+.modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.fc-time-grid-event.fc-short .fc-title {
+    white-space: pre-line !important;
+    word-break: break-all !important;
+}
+
+/*Search box*/
+.searchbox {
+    width: 400px;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url(/images/searchicon.png);
+    background-position: 8px 6px;
+    background-repeat: no-repeat;
+    padding: 4px 3px 6px 36px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+.searchbox:focus {
+        width: 95%;
+    }
+.calsearch .form-control{
+    width:95%;
+}
+
+@media(max-width: 767px){
+    .searchbox {
+        width: 95%;
+    }
+}
