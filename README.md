@@ -52,9 +52,9 @@ Technology used:
 
 *All operations like insert, update, delete and disply events on the Calendar is available in below two JavaScript Files*
 
-[Render events onthe calendar from database](calendar-js-api/FullCalendar-4.0.js)
+[Render events onthe calendar from database](SampleCalendar/calendar-js-api/FullCalendar-4.0.js)
 
-[Add/update events in the dabase](calendar-js-api/CalOperations.js)
+[Add/update events in the dabase](SampleCalendar/calendar-js-api/CalOperations.js)
 
 
 
