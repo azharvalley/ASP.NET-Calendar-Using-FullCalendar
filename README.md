@@ -50,11 +50,11 @@ Technology used:
     <script src="~/Library/fullcalendarv4/packages/moment/main.js"></script>  
 ```
 
-*All operations like insert, update, delete and disply events on the Calendar is available in below two JavaScript Files*
+*All operations like insert, update, delete and disply events on the Calendar is available in below JavaScript Files*
 
-[Render events onthe calendar from database](SampleCalendar/calendar-js-api/FullCalendar-4.0.js)
+[Render events on the calendar from Database](SampleCalendar/calendar-js-api/FullCalendar-4.0.js)
 
-[Add/update events in the dabase](SampleCalendar/calendar-js-api/CalOperations.js)
+[Add/update events in the Database](SampleCalendar/calendar-js-api/CalOperations.js)
 
 
 
